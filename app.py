@@ -69,15 +69,17 @@ if st.button("Predecir"):
         # Procesar la imagen
         img = Image.fromarray(canvas_result.image_data.astype("uint8"), "RGBA")
         img = img.convert("L")  # Escala de grises
+        img = ImageOps.invert(img)   
         img = img.resize((28, 28))
 
-        img = img.convert("L")  
+
+        
         # Convertir a array e invertir colores
         img_array = np.array(img)
         img_array = 255 - img_array  # Invertir: fondo negro, número blanco
         
         # Mostrar la imagen invertida
-        st.image(img_array, caption="Imagen procesada (28x28)", use_container_width=False)
+        st.image(img_array, caption="Imagen procesada (28x28)", use_container_width=False, clamp=True)
         
         # Preparar para el modelo
         img_array = img_array.reshape((1, 28, 28, 1)) / 255.0
@@ -126,6 +128,7 @@ if st.button("Predecir"):
 
     else:
         st.warning("⚠️ Por favor, dibuja un número antes de predecir.")
+
 
 
 
