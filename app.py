@@ -68,8 +68,7 @@ if st.button("Predecir"):
     if canvas_result.image_data is not None:
         # Procesar la imagen
         img = Image.fromarray(canvas_result.image_data.astype("uint8"), "RGBA")
-        img = img.convert("L")  # Escala de grises
-        img = ImageOps.invert(img)   
+        img = img.convert("L")  # Escala de grises   
         img = img.resize((28, 28))
 
 
@@ -79,7 +78,7 @@ if st.button("Predecir"):
         img_array = 255 - img_array  # Invertir: fondo negro, número blanco
         
         # Mostrar la imagen invertida
-        st.image(img_array, caption="Imagen procesada (28x28)", use_container_width=False, clamp=True)
+        st.image(img_array, caption="Imagen procesada (28x28)", use_container_width=False)
         
         # Preparar para el modelo
         img_array = img_array.reshape((1, 28, 28, 1)) / 255.0
